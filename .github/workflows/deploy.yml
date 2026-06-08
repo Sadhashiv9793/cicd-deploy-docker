@@ -32,7 +32,7 @@ jobs:
         run: |
           docker run -d `
             --name node-api `
-            -p 3001:3000 `
+            -p 5000:3000 `
             node-api
 
       - name: Verify Container

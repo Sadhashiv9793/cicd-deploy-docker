@@ -108,3 +108,18 @@ cmd: .\run.cmd
 
 Ex: PS C:\actions-runner> .\run.cmd
 
+
+
+# complete basic CI/CD pipeline.
+
+Git Push
+      ↓
+GitHub Actions
+      ↓
+Self Hosted Runner
+      ↓
+Docker Build
+      ↓
+Container Deployment
+      ↓
+Application Running
