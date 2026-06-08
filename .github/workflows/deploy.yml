@@ -36,3 +36,9 @@ jobs:
             --name node-api `
             -p 3000:3000 `
             node-api
+      - name: Create .env File
+        run: |
+          echo "PORT=3000" > .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
