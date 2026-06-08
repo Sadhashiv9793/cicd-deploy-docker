@@ -1,0 +1,37 @@
+name: Self Hosted Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: npm test
+
+      - name: Build Docker Image
+        run: docker build -t node-api .
+
+      - name: Stop Existing Container
+        shell: powershell
+        run: |
+          docker stop node-api
+          docker rm node-api
+        continue-on-error: true
+
+      - name: Start New Container
+        run: |
+          docker run -d `
+            --name node-api `
+            -p 3000:3000 `
+            node-api

@@ -13,11 +13,22 @@
   "license": "ISC",
   "author": "",
   "type": "commonjs",
-  "main": "index.js",
+  "main": "src/app.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+"start": "ts-node src/app.ts",
+"deploy:stop-container": "docker stop test-server || true",
+"deploy:remove-container": "docker container rm test-server || true",
+"deploy:start-container": "docker run --name test-server -d -p 3000:3000 test-server",
+"deploy:docker-build": "docker build . -t test-server",
+"deploy": "npm run deploy:docker-build && npm run deploy:stop-container && npm run deploy:remove-container && npm run deploy:start-container"
   },
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.9.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
   }
 }
