@@ -3,6 +3,7 @@ name: Self Hosted Deployment
 on:
   push:
     branches:
+      - development
       - main
 
 jobs:
