@@ -11,34 +11,31 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Install Dependencies
         run: npm install
 
-      # - name: Run Tests
-      #   run: npm test
-
       - name: Build Docker Image
         run: docker build -t node-api .
 
       - name: Stop Existing Container
+        continue-on-error: true
         shell: powershell
         run: |
           docker stop node-api
           docker rm node-api
-        continue-on-error: true
 
       - name: Start New Container
+        shell: powershell
         run: |
           docker run -d `
             --name node-api `
-            -p 3000:3000 `
+            -p 3001:3000 `
             node-api
-      - name: Create .env File
+
+      - name: Verify Container
+        shell: powershell
         run: |
-          echo "PORT=3000" > .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          docker ps
