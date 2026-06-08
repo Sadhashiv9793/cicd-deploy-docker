@@ -16,10 +16,10 @@
   "main": "src/app.ts",
   "scripts": {
 "start": "ts-node src/app.ts",
-"deploy:stop-container": "docker stop test-server || true",
-"deploy:remove-container": "docker container rm test-server || true",
-"deploy:start-container": "docker run --name test-server -d -p 3000:3000 test-server",
-"deploy:docker-build": "docker build . -t test-server",
+"deploy:stop-container": "docker stop node-api || true",
+"deploy:remove-container": "docker container rm node-api || true",
+"deploy:start-container": "docker run --name node-api -d -p 3000:3000 node-api",
+"deploy:docker-build": "docker build . -t node-api",
 "deploy": "npm run deploy:docker-build && npm run deploy:stop-container && npm run deploy:remove-container && npm run deploy:start-container"
   },
   "dependencies": {

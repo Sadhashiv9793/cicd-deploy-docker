@@ -62,13 +62,26 @@ docker run -d --name node-api -p 3000:3000 node-api
 
     -> --name my-express-app: Gives your running container a friendly, readable name so you don't have to reference it by a random string of numbers.
 
-# Important commands for docker
+## Important commands for docker ##
 
-To see your running container: docker ps
+# To see your running container: 
+docker ps
 
-To see your application logs: docker logs my-express-app
+# To see your application logs: 
+docker logs my-express-app
 
-To stop the app: docker stop my-express-app
+# To stop the app: 
+docker stop my-express-app
+
+# Remove the container 
+docker rm my_container_name
+
+## Pro: Remove and Run 
+# Run this if you already cleared the name using Option 1
+docker run -d --rm -p 3000:3000 --name node-api node-api
+
+# To see all containers on your system (both the running ones and the hidden, stopped ones)
+docker ps -a
 
 # Deploy Commands
 
@@ -81,3 +94,17 @@ To stop the app: docker stop my-express-app
 -> deploy:remove-container: removes a previously created container. The first time we run the deploy, no container would be there and the command would exit with an error code, breaking our process. To avoid this we add a “|| true” at the end, which bypasses the error.
 
 -> deploy:stop-container: very similarly to the deploy:remove-container command, this one tries to stop a container and if no container is found it does not exit with an error code.
+
+
+# GitHUb Actions 
+GitHub Repository
+→ Settings
+→ Actions
+→ Runners
+→ New self-hosted runner
+
+# Start the GitHub Action server for jobs 
+cmd: .\run.cmd
+
+Ex: PS C:\actions-runner> .\run.cmd
+
